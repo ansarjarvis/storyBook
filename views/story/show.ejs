@@ -1,0 +1,24 @@
+<%- layout("layouts/boilerplate") %>
+
+
+
+    <div class="d-flex flex-row justify-content-center align-items-center ">
+        <div class="card my-5 shadow" style="width: 50rem;">
+            <div class="card-body">
+                <h1 class="text-center">
+                    <%= foundStory.storyTitle %>
+                </h1>
+
+                <p>
+                    <%= removeTag(foundStory.storyDescription) %>
+                </p>
+                <div class="d-flex flex-row justify-content-between">
+                    <a class="btn btn-primary" role="button" href="/story/<%= foundStory._id %>/edit ">Edit</a>
+                    <form action="/story/<%= foundStory._id %>?_method=DELETE " method="POST">
+                        <button class="btn btn-primary">DELETE</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>

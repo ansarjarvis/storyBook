@@ -1,0 +1,29 @@
+<%- layout("layouts/boilerplate") %>
+
+
+    <h1 class="text-center"> <strong>All Published Stories</strong></h1>
+
+    <div class=" d-flex flex-row justify-content-center align-items-center flex-wrap my-6">
+
+        <% for(let story of stories){ %>
+            <% if(story.storyMode==="public" ){ %>
+
+                <div class="card my-1 mx-2 shadow d-flex flex-column justify-content-between"
+                    style="width: 25rem; height: 25rem;">
+                    <div class=" card-body ">
+                        <h5 class="card-title text-center">
+                            <a class="text-decoration-none" href="/story/<%= story._id %> ">
+                                <%=story.storyTitle%>
+                            </a>
+                        </h5>
+                        <p class="card-text">
+                            <%= slice(removeTag(story.storyDescription)) %>
+                        </p>
+                    </div>
+                    <a href="/story/<%= story._id %> " class="btn btn-primary mb-1 mx-2">Read</a>
+
+                </div>
+                <% } %>
+                    <% } %>
+
+    </div>
