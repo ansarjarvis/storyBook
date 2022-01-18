@@ -6,8 +6,8 @@ const engine = require("ejs-mate")
 const app = express()
 const { stripTag, sliceString } = require("./helper")
 const methodOverride = require("method-override")
-
-
+const AppError = require("./utilities/errorclass")
+const catchAsync = require("./utilities/catchAsyncError")
 
 mongoose.connect("mongodb://localhost:27017/storyDB")
     .then(() => {
@@ -40,45 +40,52 @@ app.get("/", (req, res) => {
     res.render("home")
 })
 
-app.get("/story", async (req, res) => {
+app.get("/story", catchAsync(async (req, res, next) => {
     const stories = await Story.find({})
     res.render("story/index", { stories })
-})
+}))
 
 app.get("/story/new", (req, res) => {
     res.render("story/new")
 })
 
-app.post("/story", async (req, res) => {
+app.post("/story", catchAsync(async (req, res, next) => {
     const newStory = new Story(req.body);
     await newStory.save()
     res.redirect(`/story/${newStory._id}`)
-})
+}))
 
-app.get("/story/:id", async (req, res) => {
+app.get("/story/:id", catchAsync(async (req, res, next) => {
     const { id } = req.params;
     const foundStory = await Story.findById(id)
     res.render("story/show", { foundStory })
-})
+}))
 
-app.get("/story/:id/edit", async (req, res) => {
+app.get("/story/:id/edit", catchAsync(async (req, res) => {
     const { id } = req.params;
     const foundStory = await Story.findById(id)
     res.render("story/edit", { foundStory })
-})
+}))
 
-app.put("/story/:id", async (req, res) => {
+app.put("/story/:id", catchAsync(async (req, res) => {
     const { id } = req.params;
     const foundStory = await Story.findByIdAndUpdate(id, req.body)
     res.redirect(`/story/${foundStory._id}`)
-})
+}))
 
-app.delete("/story/:id", async (req, res) => {
+app.delete("/story/:id", catchAsync(async (req, res) => {
     const { id } = req.params;
     await Story.findByIdAndDelete(id)
     res.redirect("/story")
-})
+}))
 
+app.use((err, req, res, next) => {
+    const { status = 400 } = err;
+    if (!err.message) {
+        err.message = "something went wrong"
+    }
+    res.status(status).render("error", { err })
+})
 
 
 app.listen(3000, () => {

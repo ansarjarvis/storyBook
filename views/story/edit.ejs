@@ -5,34 +5,68 @@
         <div class=" card my-2 shadow" style="width: 50rem;">
             <h1 class="text-center">EDIT THE STORY</h1>
             <div class="card-body">
-                <form action="/story/<%= foundStory._id %>?_method=PUT " method="POST">
+                <form action="/story/<%= foundStory._id %>?_method=PUT " class="edit-form" method="POST" novalidate>
                     <div class="mb-3">
                         <label for="storyTitle" class="form-label">Title</label>
                         <input type="text" id="storyTitle" class="form-control" name="storyTitle"
-                            value="<%=foundStory.storyTitle %> " placeholder="title">
+                            value="<%=foundStory.storyTitle %> " placeholder="title" required>
+                        <div class="invalid-feedback">
+                            please add title
+                        </div>
+                        <div class="valid-feedback">
+                            looks good
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="storyMode">Mode</label>
-                        <select class="form-select" name="storyMode" id="storyMode">
+                        <select class="form-select" name="storyMode" id="storyMode" required>
                             <option selected>public</option>
                             <option>private</option>
                         </select>
+                        <div class="invalid-feedback">
+                            please select mode
+                        </div>
+                        <div class="valid-feedback">
+                            looks good
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="storyDescription" class="form-label">Description</label>
-                        <textarea class="form-control" name="storyDescription" id="storyDescription" rows="3"
-                            val><%= foundStory.storyDescription %> </textarea>
+                        <textarea class="form-control is-invalid" name="storyDescription" id="storyDescription" rows="3"
+                            required><%= foundStory.storyDescription %> </textarea>
                     </div>
-                    <div class="mb-3">
-                        <button class="btn btn-primary">submit</button>
-                    </div>
-                </form>
             </div>
+            <div class="mb-3">
+                <button class="btn btn-primary">submit</button>
+            </div>
+            </form>
         </div>
+    </div>
     </div>
 
 
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict'
 
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.edit-form')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
 
 
 

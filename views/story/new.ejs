@@ -5,23 +5,36 @@
         <div class=" card my-2 shadow" style="width: 50rem;">
             <h1 class="text-center">ADD NEW STORY</h1>
             <div class="card-body">
-                <form action="/story" method="POST">
+                <form action="/story" method="POST" class="new-story" novalidate>
                     <div class="mb-3">
                         <label for="storyTitle" class="form-label">Title</label>
-                        <input type="text" id="storyTitle" class="form-control" name="storyTitle" placeholder="title">
+                        <input type="text" id="storyTitle" class="form-control" name="storyTitle" placeholder="title"
+                            required>
+                        <div class="invalid-feedback">
+                            please add title
+                        </div>
+                        <div class="valid-feedback">
+                            looks good
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="storyMode">Mode</label>
-                        <select class="form-select" name="storyMode" id="storyMode">
-                            <option selected> select menu</option>
-                            <option>public</option>
+                        <select class="form-select" name="storyMode" id="storyMode" required>
+                            <option selected>public</option>
                             <option>private</option>
                         </select>
+                        <div class="invalid-feedback">
+                            please select mode
+                        </div>
+                        <div class="valid-feedback">
+                            looks good
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="storyDescription" class="form-label">Description</label>
-                        <textarea class="form-control" name="storyDescription" id="storyDescription"
-                            rows="3"></textarea>
+                        <textarea class="form-control is-invalid" name="storyDescription" id="storyDescription" rows="3"
+                            required></textarea>
+
                     </div>
                     <div class="mb-3">
                         <button class="btn btn-primary">submit</button>
@@ -32,6 +45,50 @@
     </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.new-story')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
 
 
 
