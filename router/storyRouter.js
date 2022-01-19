@@ -25,7 +25,7 @@ router.get("/story/new", isLoggedIn, (req, res) => {
 
 router.post("/story", isLoggedIn, storyValidator, catchAsync(async (req, res, next) => {
     const newStory = new Story(req.body);
-    console.log(newStory)
+    newStory.author = req.user._id
     await newStory.save()
     req.flash("success", "story added successfully")
     res.redirect(`/story/${newStory._id}`)
@@ -33,8 +33,13 @@ router.post("/story", isLoggedIn, storyValidator, catchAsync(async (req, res, ne
 
 router.get("/story/:id", catchAsync(async (req, res, next) => {
     const { id } = req.params;
-    const foundStory = await Story.findById(id)
-    res.render("story/show", { foundStory })
+    const foundStory = await Story.findById(id).populate("author")
+    if (!foundStory) {
+        req.flash("error", "story dont exit yet")
+        res.redirect("/story")
+    } else {
+        res.render("story/show", { foundStory })
+    }
 }))
 
 router.get("/story/:id/edit", isLoggedIn, catchAsync(async (req, res) => {
@@ -56,6 +61,8 @@ router.delete("/story/:id", isLoggedIn, catchAsync(async (req, res) => {
     req.flash("success", "story successfully deleted")
     res.redirect("/story")
 }))
+
+
 
 
 module.exports = router;

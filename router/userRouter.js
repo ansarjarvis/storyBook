@@ -2,12 +2,12 @@ const express = require("express")
 const passport = require("passport")
 const router = express.Router()
 const User = require("../models/user")
+const isLoggedIn = require("../middleware/middlewares").isLoggedIn
 
 
 router.get("/register", (req, res) => {
     res.render("user/register")
 })
-
 
 router.post("/register", async (req, res) => {
     const { email, username, password } = req.body;
@@ -41,6 +41,9 @@ router.get("/logout", (req, res) => {
     res.redirect("/story")
 })
 
+router.get("/profile", isLoggedIn, (req, res) => {
+    res.render("user/profile")
+})
 
 
 

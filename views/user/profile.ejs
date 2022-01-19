@@ -1,0 +1,27 @@
+<%- layout("layouts/boilerplate") %>
+
+    <div class="row mt-5">
+        <div class="col-6 offset-4">
+            <div class="card shadow" style="width: 25rem;">
+                <img src="https://images.unsplash.com/photo-1641160401272-94ca7afbd64f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDExNnx0b3dKWkZza3BHZ3x8ZW58MHx8fHw%3D&auto=format&fit=crop&w=400&q=60"
+                    alt="" class="card-img-top">
+                <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                    <h3 class="card-title text-center"> Username -
+                        <strong>
+                            <%= currentLoggedInUser.username %>
+                        </strong>
+                    </h3>
+                    <h5 class="text-center">Email -
+                        <strong>
+                            <%= currentLoggedInUser.email %>
+                        </strong>
+                    </h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's
+                        content.</p>
+                    <a href="#" class="btn btn-primary">All Your Stories</a>
+                </div>
+            </div>
+        </div>
+
+    </div>

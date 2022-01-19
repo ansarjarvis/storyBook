@@ -10,13 +10,20 @@
                 <p>
                     <%= removeTag(foundStory.storyDescription) %>
                 </p>
-                <div class="d-flex flex-row justify-content-between">
-                    <a class="btn btn-primary" role="button" href="/story/<%= foundStory._id %>/edit ">Edit</a>
-                    <form action="/story/<%= foundStory._id %>?_method=DELETE " method="POST">
-                        <button class="btn btn-primary">DELETE</button>
-                    </form>
+                <blockquote class="blockquote">
+                    <span class="blockquote-footer text-danger">
+                        Story By <%= foundStory.author.username %>
+                    </span>
+                </blockquote>
+                <% if(currentLoggedInUser && foundStory.author.equals(currentLoggedInUser._id)) {%>
+                    <div class="d-flex flex-row justify-content-between">
+                        <a class="btn btn-primary" role="button" href="/story/<%= foundStory._id %>/edit ">Edit</a>
+                        <form action="/story/<%= foundStory._id %>?_method=DELETE " method="POST">
+                            <button class="btn btn-primary">DELETE</button>
+                        </form>
+                    </div>
+                    <% } %>
 
-                </div>
             </div>
         </div>
     </div>

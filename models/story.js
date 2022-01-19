@@ -15,6 +15,10 @@ const storySchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 2
+    },
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     }
 })
 

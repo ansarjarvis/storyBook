@@ -1,0 +1,49 @@
+
+.container{
+    font-family: 'Pacifico', cursive;
+    height: 100vh;
+    background-image:linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../images/wolf.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.wrapper,header{
+    max-width: 100vw;
+}
+
+
+.navlink a{
+    margin-left: 2rem;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+
+}
+
+.navlink a:hover{
+    color: rgb(255, 255, 255);
+}
+
+.main a{
+    /* background-color: #502b2b50; */
+    width: 300px;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color:rgb(255, 255, 255);
+    border-radius: 2rem;
+
+}
+
+.main a:hover{
+    color: rgb(0, 0, 0);
+    /* background-color: white; */
+}
+
+h6{
+    font-size: 1rem;
+    color: rgb(240, 218, 21);
+}
+
+
+
