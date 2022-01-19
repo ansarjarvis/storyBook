@@ -26,17 +26,17 @@
 }
 
 .main a{
-    /* background-color: #502b2b50; */
+    background-color: #bde0fe;
     width: 300px;
     font-size: 1.5rem;
     text-decoration: none;
-    color:rgb(255, 255, 255);
+    color:rgb(0, 0, 0);
     border-radius: 2rem;
 
 }
 
 .main a:hover{
-    color: rgb(0, 0, 0);
+    color: #03071e;
     /* background-color: white; */
 }
 
