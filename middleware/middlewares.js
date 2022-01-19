@@ -14,4 +14,24 @@ const storyValidator = (req, res, next) => {
     }
 }
 
-module.exports = storyValidator;
+
+const isLoggedIn = (req, res, next) => {
+    if (!req.isAuthenticated()) {
+        req.flash("error", " you must be logged in")
+        res.redirect("/login")
+    } else {
+        next()
+    }
+}
+
+
+
+
+
+
+
+
+
+module.exports.isLoggedIn = isLoggedIn
+
+module.exports.storyValidator = storyValidator;

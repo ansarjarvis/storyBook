@@ -10,6 +10,15 @@
                 <a class="nav-link active" href="/story">All Stories </a>
                 <a class="nav-link active" href="/story/new">Add Story</a>
             </div>
+            <div class="navbar-nav ms-auto">
+
+                <% if(!currentLoggedInUser ) {%>
+                    <a href="/register" class="nav-link active">Register</a>
+                    <a href="/login" class="nav-link active">Login</a>
+                    <% } else {%>
+                        <a href="/logout" class="nav-link active">Logout</a>
+                        <% } %>
+            </div>
         </div>
     </div>
 </nav>
