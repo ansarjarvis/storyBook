@@ -41,7 +41,7 @@
   
   
   .card {
-    /* background: #191c29; */
+    background: #001427;
     width: var(--card-width);
     height: var(--card-height);
     padding: 3px;
@@ -80,7 +80,7 @@
     border-radius: 8px;
     background-image: linear-gradient(
       var(--rotate)
-      , #5ddcff, #3c67e3 43%, #4e00c2);
+      , #5ddcff, #b1e33c 43%, #0965f0);
       position: absolute;
       z-index: -1;
       top: -1%;
@@ -134,4 +134,14 @@
   }
   h6{
       color: #3c67e3;
+  }
+
+  @media(max-width:300px){
+    
+    .card{
+      width: 200px;
+    }
+    .link{
+      font-size: 1.5rem;
+    }
   }
