@@ -1,8 +1,8 @@
 <%- layout("layouts/boilerplate") %>
 
 
-    <div class="d-flex flex-column justify-content-center align-items-center my-5">
-        <div class=" card my-2 shadow" style="width: 50rem;">
+    <div class="">
+        <div class=" card mt-5 offset-2 shadow" style="width: 60vw;">
             <h1 class="text-center">EDIT THE STORY</h1>
             <div class="card-body">
                 <form action="/story/<%= foundStory._id %>?_method=PUT " class="edit-form" method="POST" novalidate>
@@ -35,13 +35,13 @@
                         <textarea class="form-control is-invalid" name="storyDescription" id="storyDescription" rows="3"
                             required><%= foundStory.storyDescription %> </textarea>
                     </div>
+
+                    <div class="mb-3">
+                        <button class="btn btn-primary">submit</button>
+                    </div>
+                </form>
             </div>
-            <div class="mb-3">
-                <button class="btn btn-primary">submit</button>
-            </div>
-            </form>
         </div>
-    </div>
     </div>
 
 
