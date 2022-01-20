@@ -18,11 +18,13 @@ const localStrategy = require("passport-local")
 const User = require("./models/user")
 const mongoSenitize = require("express-mongo-sanitize")
 const helmet = require("helmet")
+const MongoStore = require("connect-mongo")
+const AppError = require("./utilities/errorclass")
 
 
 
-
-mongoose.connect("mongodb://localhost:27017/storyDB")
+const dbUrl = process.env.DBURL || "mongodb://localhost:27017/storyDB"
+mongoose.connect(dbUrl)
     .then(() => {
         console.log("database connection successfull")
     })
@@ -35,6 +37,9 @@ mongoose.connect("mongodb://localhost:27017/storyDB")
 const secretKey = process.env.SECRET || "thisistopsecret"
 
 const sessionConfig = {
+    store: MongoStore.create({
+        mongoUrl: dbUrl
+    }),
     secret: secretKey,
     resave: false,
     saveUninitialized: false,
@@ -79,7 +84,9 @@ app.use((req, res, next) => {
 
 app.use("/", storyRouter)
 app.use("/", userRouter)
-
+app.use("*", (req, res) => {
+    throw new AppError(400, "Page not found")
+})
 
 // error handler middleware function
 
