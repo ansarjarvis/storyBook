@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config()
+}
+
 const express = require("express")
 const app = express()
 const path = require("path")
@@ -12,6 +16,8 @@ const flash = require("connect-flash")
 const passport = require("passport")
 const localStrategy = require("passport-local")
 const User = require("./models/user")
+const mongoSenitize = require("express-mongo-sanitize")
+const helmet = require("helmet")
 
 
 
@@ -26,8 +32,10 @@ mongoose.connect("mongodb://localhost:27017/storyDB")
     })
 
 
+const secretKey = process.env.SECRET || "thisistopsecret"
+
 const sessionConfig = {
-    secret: "thisistopsecret",
+    secret: secretKey,
     resave: false,
     saveUninitialized: false,
 }
@@ -38,6 +46,8 @@ app.use(express.static(path.join(__dirname, "public")))
 app.use(methodOverride("_method"))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static("public"))
+app.use(mongoSenitize())
+app.use(helmet({ contentSecurityPolicy: false }));
 app.engine("ejs", engine)
 app.set("view engine", "ejs")
 app.set("views", path.join(__dirname, "views"))

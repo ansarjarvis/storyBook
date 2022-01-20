@@ -63,6 +63,11 @@ router.delete("/story/:id", isLoggedIn, catchAsync(async (req, res) => {
 }))
 
 
+router.get("/userstories", (req, res) => {
+    req.flash("error", " Sorry , This page is currently under maintenance. Its advisable to keep all of your stories PUBLIC")
+    res.redirect("/profile")
+})
+
 
 
 module.exports = router;
